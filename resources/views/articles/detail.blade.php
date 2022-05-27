@@ -17,7 +17,9 @@
         {{ $article->created_at->diffForHumans() }}
       </div>
       <p class="card-text">{{ $article->body }}</p>
-      <a class="btn btn-danger" href="{{ url('/articles/delete/$article->id') }}">
+      <a class="btn btn-danger"
+        onclick="return confirm(Confirm)"
+        href="{{ url('/articles/delete/' .$article->id) }}">
         Delete
       </a>
     </div>
