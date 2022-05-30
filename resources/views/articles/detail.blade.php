@@ -10,19 +10,46 @@
 </head>
 
 <body>
-  <div class="card mb-2" style="margin: 20px ;">
-    <div class="card-body">
-      <h5 class="card-title">{{ $article->title }}</h5>
-      <div class="card-subtitle mb-2 text-muted small">
-        {{ $article->created_at->diffForHumans() }}
+    <div class="card mb-2" style="margin: 20px ;">
+      <div class="card-body">
+        <h5 class="card-title">{{ $article->title }}</h5>
+        <div class="card-subtitle mb-2 text-muted small">
+          {{ $article->created_at->diffForHumans() }},
+          Category: <b>{{ $article->category->name }}</b>
+        </div>
+        <p class="card-text">{{ $article->body }}</p>
+        <a class="btn btn-danger"
+          onclick="return confirm(Confirm)"
+          href="{{ url('/articles/delete/' .$article->id) }}">
+          Delete
+        </a>
       </div>
-      <p class="card-text">{{ $article->body }}</p>
-      <a class="btn btn-danger"
-        onclick="return confirm(Confirm)"
-        href="{{ url('/articles/delete/' .$article->id) }}">
-        Delete
-      </a>
     </div>
+
+    <div style="margin: 20px;">
+      <ul class="list-group">
+        <li class="list-group-item active">
+          <b>Comments ({{ count($article->comments) }})</b>
+        </li>
+
+        @foreach($article->comments as $comment)
+        <li class="list-group-item">
+          {{ $comment->content }}
+        </li><br>
+        @endforeach
+      </ul>
+
+      <form action="{{ url('/comments/add') }}" method="post">
+        @csrf
+        <input type="hidden" name="article_id"
+        value="{{ $article->id }}">
+
+        <!-- <textarea name="content" class="from-control mb-2" placeholder="New Comment"></textarea> -->
+        <label>Comment </label>
+        <input type="text" name="content" class="form-control"><br>
+
+        <input type="submit" value="Add Comment" class="btn btn-secondary"> <br>
+      </form>
   </div>
 
 </body>

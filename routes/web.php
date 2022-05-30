@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,13 @@ Route::get('/articles/delete/{id}', [
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/comments/add', [
+    CommentController::class,
+    'create'
+]);
+
+Route::get('comments/delete/{id}', [
+    CommentController::class,
+    'delete'
+]);
