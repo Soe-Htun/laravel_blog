@@ -34,11 +34,17 @@
 
         @foreach($article->comments as $comment)
         <li class="list-group-item">
+          <a href="{{ url('/comments/delete/$comment->id') }}" class="btn-close float-end"></a>
           {{ $comment->content }}
+          <div class="small mt-2">
+            By <b> {{ $comment->user->name }} </b>,
+            {{ $comment->created_at->diffForHumans() }}
+          </div>
         </li><br>
         @endforeach
       </ul>
 
+      @auth
       <form action="{{ url('/comments/add') }}" method="post">
         @csrf
         <input type="hidden" name="article_id"
@@ -50,6 +56,7 @@
 
         <input type="submit" value="Add Comment" class="btn btn-secondary"> <br>
       </form>
+      @endauth
   </div>
 
 </body>

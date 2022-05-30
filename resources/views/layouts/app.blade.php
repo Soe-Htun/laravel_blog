@@ -33,10 +33,12 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    
                     <ul class="navbar-nav me-auto">
+                        
                         <li class="nav-item">
                             <a class="nav-link btn btn-success text-white btn-sm" href="{{ url('/articles/add') }}">
-                                Add Data
+                                Add Article
                             </a>
                         </li>
                     </ul>
